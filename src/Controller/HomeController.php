@@ -9,6 +9,7 @@ class HomeController extends BaseController
 
     public function index(): void
     {
-        $this->render('home');
+        $data = ['name' => 'mo', 'age' => 25];
+        $this->render('home', $data);
     }
 }

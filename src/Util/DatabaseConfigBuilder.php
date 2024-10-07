@@ -48,4 +48,8 @@ class DatabaseConfigBuilder implements Builder
         $this->dbConfig->setDbName($dbName);
         return $this;
     }
+    public function getDbConfig(): DatabaseConfig
+    {
+        return $this->dbConfig;
+    }
 }

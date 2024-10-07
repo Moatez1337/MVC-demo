@@ -33,16 +33,6 @@ class DatabaseConfig
         $this->password = $password;
     }
 
-    public function getDatabase(): string
-    {
-        return $this->database;
-    }
-
-    public function setDatabase(string $database): void
-    {
-        $this->database = $database;
-    }
-
     public function getHost(): string
     {
         return $this->host;

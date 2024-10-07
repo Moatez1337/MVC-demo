@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
+use App\Container\DatabaseContainer;
 use App\Controller\HomeController;
+use App\Util\DatabaseConnector;
 use App\Util\Router;
 
 $router = new Router();
 
 $homeController = new HomeController();
+$dbConfigContainer = new DatabaseContainer;
+
+DatabaseConnector::getInstance($dbConfigContainer->getDbConfig());
 
 $router->register('home', 'GET', [$homeController, 'index']);
 
