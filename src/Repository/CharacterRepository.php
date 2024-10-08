@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Character;
-use App\Util\DatabaseConfig;
-use App\Util\DatabaseConnector;
+use App\Util\Database\DatabaseConfig;
+use App\Util\Database\DatabaseConnector;
 use PDO;
 
 class CharacterRepository

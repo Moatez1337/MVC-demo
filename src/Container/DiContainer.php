@@ -6,17 +6,28 @@ namespace App\Container;
 
 use App\Controller\CharacterController;
 use App\Repository\CharacterRepository;
-use App\Util\DatabaseConfig;
-use App\Util\DatabaseConfigBuilder;
+use App\Util\Database\DatabaseConfig;
+use App\Util\Database\DatabaseConfigBuilder;
 
 class DiContainer
 {
     private array $services = [];
+    private static ?DiContainer $instance = null;
 
-    public function __construct()
+    private function __construct()
     {
         $this->registerServices();
     }
+
+    public static function getInstance(): DiContainer
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
 
     private function registerServices(): void
     {
@@ -30,12 +41,15 @@ class DiContainer
             return $this->makeCharacterController();
         };
     }
+
     private function makeCharacterRepository(): CharacterRepository
     {
         return new CharacterRepository($this->makeDatabaseConfig());
 
     }
-    private function makeCharacterController(): CharacterController{
+
+    private function makeCharacterController(): CharacterController
+    {
         return new CharacterController($this->makeCharacterRepository());
     }
 

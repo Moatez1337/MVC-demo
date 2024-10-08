@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Util;
+namespace App\Util\Database;
 
 use PDO;
 use PDOException;
