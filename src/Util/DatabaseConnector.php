@@ -12,6 +12,7 @@ class DatabaseConnector
 
     private DatabaseConfig $dbConfig;
     private static ?DatabaseConnector $instance = null;
+    private PDO $connection;
 
     private function __construct(DatabaseConfig $dbConfig)
     {
@@ -33,7 +34,7 @@ class DatabaseConnector
         try {
             $conn = $this->createConnection();
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "Connected successfully";
+            $this->connection = $conn;
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }
@@ -47,5 +48,10 @@ class DatabaseConnector
         $dbName = $this->dbConfig->getDbName();
 
         return new PDO("mysql:host=$host;dbname=$dbName", $username, $password);
+    }
+
+    public function getConnection(): PDO
+    {
+        return $this->connection;
     }
 }
